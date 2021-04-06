@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -24,7 +23,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//jdbc Authentication
 		auth.jdbcAuthentication()
-			.dataSource(dataSource); //H2 Database
+			.dataSource(dataSource) //H2 Database
+			//here you can use your own custom tables to get the user and authority information
+			.usersByUsernameQuery("select username,password,enabled"
+					+"from MyUserTable"
+					+ "where username=?")
+			.authoritiesByUsernameQuery("select username, authority"
+					+"from Myauthoritytable"
+					+" where username=? ");
 			
 	}
 	
