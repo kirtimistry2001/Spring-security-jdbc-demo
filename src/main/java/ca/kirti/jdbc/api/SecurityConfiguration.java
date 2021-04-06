@@ -24,18 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//jdbc Authentication
 		auth.jdbcAuthentication()
-			.dataSource(dataSource) //H2 Database
-			.withDefaultSchema() 	// default database schema just ot test
-			.withUser(	//adding some dummy users to default database
-					User.withUsername("user")
-					.password("pass")
-					.roles("USER")
-					)
-			.withUser(
-					User.withUsername("admin")
-					.password("pass2")
-					.roles("ADMIN")
-					);
+			.dataSource(dataSource); //H2 Database
+			
 	}
 	
 	//setip authorization
