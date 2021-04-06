@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
@@ -27,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		//jdbc Authentication
 		auth.jdbcAuthentication()
 			.dataSource(dataSource) //H2 Database
-			.withDefaultSchema() 	// default database schema
+			.withDefaultSchema() 	// default database schema just ot test
 			.withUser(	//adding some dummy users to default database
 					User.withUsername("user")
 					.password("pass")
